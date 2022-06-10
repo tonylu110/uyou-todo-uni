@@ -1,33 +1,74 @@
-.list-item {
-  position: relative;
-  width: 660rpx;
-  background-color: #f6f2e9;
-  height: auto;
-  padding: 20rpx;
-  border-radius: 10rpx;
-  box-shadow: 0 2rpx 10rpx #7a695c50;
-  margin-bottom: 20rpx;
-  
-	.time-area {
-		background-color: #ede4d8;
-		margin-left: -20rpx;
-		margin-top: -20rpx;
-		padding: 10rpx 20rpx;
-		width: 660rpx;
-		border-radius: 10rpx 10rpx 0 0;
+movable-area {
+	width: 1000rpx;
+	margin-bottom: 30rpx;
+	
+	.ok-button {
+		position: absolute;
+		left: 150rpx;
+		background-color: #00b600;
+		color: white;
+		width: 140rpx;
+		border-radius: 10rpx;
 		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
 		align-items: center;
-
-		span {
-		    color: #cebfae;
+		justify-content: center;
+		
+		&:active {
+			background-color: #00a600;
+		}
+		
+		image {
+			width: 100rpx;
+			height: 100rpx;
 		}
 	}
-
-	.item-text {
-		display: block;
-		margin-top: 20rpx;
-		color: #6e492f;
+	
+	.close-button {
+		@extend .ok-button;
+		left: 709rpx;
+		background-color: #d6010f;
+		
+		&:active {
+			background-color: #b6000b;
+		}
+	}
+	
+	movable-view {
+		width: 700rpx;
+		z-index: 10;
+		
+		.list-item {
+		  position: relative;
+		  width: 660rpx;
+		  background-color: #f6f2e9;
+		  height: auto;
+		  padding: 20rpx;
+		  border-radius: 10rpx;
+		  box-shadow: 0 2rpx 10rpx #7a695c50;
+		  margin-bottom: 20rpx;
+		  
+			.time-area {
+				background-color: #ede4d8;
+				margin-left: -20rpx;
+				margin-top: -20rpx;
+				padding: 10rpx 20rpx;
+				width: 660rpx;
+				border-radius: 10rpx 10rpx 0 0;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+		
+				span {
+				    color: #cebfae;
+				}
+			}
+		
+			.item-text {
+				display: block;
+				margin-top: 20rpx;
+				color: #6e492f;
+			}
+		}
 	}
 }
