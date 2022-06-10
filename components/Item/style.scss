@@ -1,0 +1,33 @@
+.list-item {
+  position: relative;
+  width: 660rpx;
+  background-color: #f6f2e9;
+  height: auto;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  box-shadow: 0 2rpx 10rpx #7a695c50;
+  margin-bottom: 20rpx;
+  
+	.time-area {
+		background-color: #ede4d8;
+		margin-left: -20rpx;
+		margin-top: -20rpx;
+		padding: 10rpx 20rpx;
+		width: 660rpx;
+		border-radius: 10rpx 10rpx 0 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+
+		span {
+		    color: #cebfae;
+		}
+	}
+
+	.item-text {
+		display: block;
+		margin-top: 20rpx;
+		color: #6e492f;
+	}
+}
