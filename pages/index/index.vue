@@ -2,13 +2,15 @@
 	<view class="content">
 		<TitleBar 
 		  :showBackButton="false" 
+		  :showRightButton="true"
 		  title="uyou Todo" 
 		  bgColor="#7a695c" 
 		  fontColor="#fff"
 		  navShadowColor="90"
 		/>
-		<scroll-view scroll-y="true" :style="{height: screenHeight - systemBarHeight - rpx2px(131) + 'px'}">
+		<scroll-view scroll-y="true" :style="{height: screenHeight - systemBarHeight - rpx2px(101) + 'px'}">
 			<view class="scroll-in">
+				<view style="height: 30rpx;"></view>
 				<Item 
 				  v-for="(item,index) in list"
 				  :ok='item.ok' 
@@ -28,8 +30,6 @@ import Item from '../../components/Item/Item.vue'
 const rpx2px = (rpx: number): number => {
 	return uni.upx2px(rpx)
 }
-const isOk = ref(false)
-const title = ref('Hello')
 const screenHeight = ref(0)
 const systemBarHeight = ref(0)
 uni.$on('systemBarHeight', (res): void => {
@@ -51,10 +51,6 @@ onMounted(() => {
 	align-items: center;
 	justify-content: center;
 	background-color: #edd9b7;
-	
-	scroll-view {
-		padding-top: 30rpx;
-	}
 }
 .scroll-in {
 	width: 750rpx;

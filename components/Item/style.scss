@@ -12,14 +12,11 @@ movable-area {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		box-shadow: inset 0 0 5rpx #00000050;
+		margin-top: 1rpx;
 		
 		&:active {
-			background-color: #00a600;
-		}
-		
-		image {
-			width: 100rpx;
-			height: 100rpx;
+			background-color: #008600;
 		}
 	}
 	

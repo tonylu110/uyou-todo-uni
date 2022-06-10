@@ -1,26 +1,23 @@
 <template>
 	<movable-area :style="{height: itemHeight + 'px'}">
-		<view class="ok-button" :style="{height: itemHeight + 'px'}" @click="buttonClick(true)">
-			<image src="../../static/images/ok.png" mode=""></image>
+		<view class="ok-button" :style="{height: itemHeight - 1 + 'px'}" @click="buttonClick(true)">
+			<uni-icons type="checkmarkempty" :size="rpx2px(80)" color="white"></uni-icons>
 		</view>
-		<movable-view :out-of-bounds="true" :x="x" direction="horizontal" @change="itemChange">
+		<movable-view :damping="50" :out-of-bounds="true" :x="x" direction="horizontal" @change="itemChange">
 			<view class="list-item">
 				<view class="time-area">
 					<span>{{ moment(time).format("hh:mm A") }}</span>
 				</view>
 				<span 
 				  class="item-text" 
-				  :style="{
-					textDecoration: (isOk ? 'line-through' : ''),
-					color: (isOk ? '#cebfae' : '')
-				  }"
+				  :style="{ color: (isOk ? '#cebfae' : '')}"
 				>
 					{{ text }}
 				</span>
 			</view>
 		</movable-view>
-		<view class="close-button" :style="{height: itemHeight + 'px'}" @click="buttonClick(false)">
-			<image src="../../static/images/close.png" mode=""></image>
+		<view class="close-button" :style="{height: itemHeight - 1 + 'px'}" @click="buttonClick(false)">
+			<uni-icons type="closeempty" :size="rpx2px(80)" color="white"></uni-icons>
 		</view>
 	</movable-area>
 </template>
