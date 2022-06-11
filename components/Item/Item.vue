@@ -6,7 +6,7 @@
 		<movable-view :damping="50" :out-of-bounds="true" :x="x" direction="horizontal" @change="itemChange">
 			<view class="list-item">
 				<view class="time-area">
-					<span>{{ moment(time).format("hh:mm A") }}</span>
+					<span>{{ getTime(time) }}</span>
 				</view>
 				<span 
 				  class="item-text" 
@@ -23,8 +23,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, defineProps } from 'vue'
-import moment from 'moment'
+import { ref, onMounted } from 'vue'
+import getTime from '../../util/getTime'
 const rpx2px = (rpx: number): number => {
 	return uni.upx2px(rpx)
 }
@@ -47,17 +47,28 @@ onMounted(() => {
 	}).exec()
 })
 
-const buttonClick = (use: boolean) => {
+const emits = defineEmits<{
+	(e: 'setOk', id: number, isOk: boolean): void
+	(e: 'deleteItem', id: number): void
+}>()
+const buttonClick = (use: boolean): void => {
 	x.value = rpx2px(150)
 	if (use) {
 		isOk.value = !isOk.value
+		emits('setOk', props.time, isOk.value)
 	} else {
-		
+		emits('deleteItem', props.time)
 	}
 }
 
 const itemChange = (e) => {
 	x.value = e.detail.x
+	if (e.detail.x < 150 && e.detail.x > rpx2px(150)) {
+		x.value = rpx2px(150)
+	}
+	if (e.detail.x < rpx2px(150) && e.detail.x > 50) {
+		x.value = rpx2px(150)
+	}
 }
 </script>
 
