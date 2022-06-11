@@ -59,7 +59,15 @@ onMounted(() => {
 })
 
 const setOk = (id: number, isOk: boolean): void => {
-	let oldList = list.value
+	for(let i = 0; i < list.value.length; i++) {
+		if (list.value[i].id === id) {
+			list.value[i].ok = isOk
+		}
+	}
+	uni.setStorage({
+		key: 'todo',
+		data: list.value
+	})
 }
 const deleteItem = (id: number): void => {
 	console.log('delete', id)
