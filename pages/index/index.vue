@@ -7,10 +7,16 @@
 		  bgColor="#7a695c" 
 		  fontColor="#fff"
 		  navShadowColor="90"
+		  @addShow="add"
 		/>
 		<scroll-view scroll-y="true" :style="{height: screenHeight - systemBarHeight - rpx2px(101) + 'px'}">
 			<view class="scroll-in">
 				<view style="height: 30rpx;"></view>
+				<AddItem
+				  v-if="addShow"
+				  @addItemShow="addItemShow"
+				  @addItem="addItem"
+				/>
 				<Item 
 				  v-for="(item,index) in list"
 				  :ok='item.ok' 
@@ -25,11 +31,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import TitleBar from '../../components/TitleBar/TitleBar.vue'
-import listData from '../../test/list'
-import Item from '../../components/Item/Item.vue'
+import { ref, onMounted, defineAsyncComponent } from 'vue'
+import AddItem from '../../components/AddItem/AddItem.vue'
 import FirstLoad from '../../util/FirstLoad'
+import IItemData from '../../interface/IItemData'
 FirstLoad()
 const rpx2px = (rpx: number): number => {
 	return uni.upx2px(rpx)
@@ -37,6 +42,7 @@ const rpx2px = (rpx: number): number => {
 const screenHeight = ref(0)
 const systemBarHeight = ref(0)
 const list = ref()
+const addShow = ref(false)
 uni.$on('systemBarHeight', (res): void => {
 	systemBarHeight.value = res
 })
@@ -70,7 +76,31 @@ const setOk = (id: number, isOk: boolean): void => {
 	})
 }
 const deleteItem = (id: number): void => {
-	console.log('delete', id)
+	for (let i = 0; i < list.value.length; i++) {
+	    if (list.value[i].id === id) {
+			list.value.splice(i, 1)
+	    }
+	}
+	uni.setStorage({
+		key: 'todo',
+		data: list.value,
+	})
+}
+const add = () => {
+	addShow.value = true
+}
+
+const addItem = (item: IItemData) => {
+	list.value.unshift(item)
+	uni.setStorage({
+		key: 'todo',
+		data: list.value,
+	})
+	addShow.value = false
+}
+
+const addItemShow = () => {
+	addShow.value = false
 }
 </script>
 

@@ -33,12 +33,12 @@ movable-area {
 	movable-view {
 		width: 700rpx;
 		z-index: 10;
+		height: auto;
 		
 		.list-item {
 		  position: relative;
 		  width: 660rpx;
 		  background-color: #f6f2e9;
-		  height: auto;
 		  padding: 20rpx;
 		  border-radius: 10rpx;
 		  box-shadow: 0 2rpx 10rpx #7a695c50;
@@ -56,13 +56,16 @@ movable-area {
 				justify-content: space-between;
 				align-items: center;
 		
-				span {
+				text {
 				    color: #cebfae;
 				}
 			}
 		
 			.item-text {
-				display: block;
+				width: 660rpx;
+				display: inline-block;
+				word-wrap: break-word;
+				white-space: normal;
 				margin-top: 20rpx;
 				color: #6e492f;
 			}

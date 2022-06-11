@@ -4,16 +4,16 @@
 			<uni-icons type="checkmarkempty" :size="rpx2px(80)" color="white"></uni-icons>
 		</view>
 		<movable-view :damping="50" :out-of-bounds="true" :x="x" direction="horizontal" @change="itemChange">
-			<view class="list-item">
+			<view ref="itemRef" class="list-item" :id="'item' + time">
 				<view class="time-area">
-					<span>{{ getTime(time) }}</span>
+					<text>{{ getTime(time) }}</text>
 				</view>
-				<span 
+				<text 
 				  class="item-text" 
 				  :style="{ color: (isOk ? '#cebfae' : '')}"
 				>
 					{{ text }}
-				</span>
+				</text>
 			</view>
 		</movable-view>
 		<view class="close-button" :style="{height: itemHeight - 1 + 'px'}" @click="buttonClick(false)">
@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watchEffect, onUpdated } from 'vue'
 import getTime from '../../util/getTime'
 const rpx2px = (rpx: number): number => {
 	return uni.upx2px(rpx)
@@ -41,10 +41,22 @@ const props = defineProps({
 const isOk = ref(props.ok)
 const itemHeight = ref(0)
 
-onMounted(() => {
-	uni.createSelectorQuery().select('.list-item').boundingClientRect((res) => {
+const getItemHeight = () => {
+	let itemId: string = '#item' + props.time
+	uni.createSelectorQuery().select(itemId).boundingClientRect((res) => {
 		itemHeight.value = res.height
 	}).exec()
+}
+
+watchEffect(() => {
+	isOk.value = props.ok
+})
+
+onMounted(() => {
+	getItemHeight()
+})
+onUpdated(() => {
+	getItemHeight()
 })
 
 const emits = defineEmits<{

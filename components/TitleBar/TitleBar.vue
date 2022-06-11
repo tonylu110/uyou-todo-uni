@@ -52,11 +52,14 @@ onMounted(() => {
 		}
 	})
 })
+const emits = defineEmits<{
+	(e: 'addShow'): void
+}>()
 const left = () => {
 	uni.navigateBack({})
 }
 const right = () => {
-	
+	emits('addShow')
 }
 </script>
 
