@@ -26,6 +26,7 @@
 					  :text="item.text" 
 					  :time="item.id"
 					  @setOk="setOk"
+					  :x="setX"
 					/>
 				</view>
 			</view>
@@ -47,6 +48,7 @@ const screenHeight = ref(0)
 const systemBarHeight = ref(0)
 const list = reactive([])
 const addShow = ref(false)
+const setX = ref(0)
 uni.$on('systemBarHeight', (res): void => {
 	systemBarHeight.value = res
 })
@@ -99,6 +101,10 @@ const deleteItem = (id: number): void => {
 		key: 'todo',
 		data: list
 	})
+	setX.value = 1
+	setTimeout(() => {
+		setX.value = 0
+	}, 10)
 }
 const add = () => {
 	addShow.value = true
@@ -137,7 +143,7 @@ const addItemShow = () => {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	margin-bottom: 30rpx;
 	
 	.delete-button {
 		position: absolute;
@@ -150,7 +156,6 @@ const addItemShow = () => {
 		align-items: center;
 		justify-content: center;
 		box-shadow: inset 0 0 5rpx #00000050;
-		margin-top: -15rpx;
 		z-index: 5;
 		height: 130rpx;
 		
