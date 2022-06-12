@@ -1,5 +1,5 @@
 {
-    "name" : "uyou-todo-uni",
+    "name" : "uyou todo",
     "appid" : "__UNI__1579B5E",
     "description" : "",
     "versionName" : "1.0.0",
@@ -44,7 +44,9 @@
                 "abiFilters" : [ "armeabi-v7a", "arm64-v8a" ]
             },
             /* ios打包配置 */
-            "ios" : {},
+            "ios" : {
+                "idfa" : false
+            },
             /* SDK配置 */
             "sdkConfigs" : {
                 "ad" : {}
@@ -84,7 +86,8 @@
             "splashscreen" : {
                 "androidStyle" : "common"
             }
-        }
+        },
+        "nvueLaunchMode" : ""
     },
     /* 快应用特有相关 */
     "quickapp" : {},

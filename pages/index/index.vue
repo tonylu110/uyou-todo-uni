@@ -17,21 +17,25 @@
 				  @addItemShow="addItemShow"
 				  @addItem="addItem"
 				/>
-				<Item 
-				  v-for="(item,index) in list"
-				  :ok='item.ok' 
-				  :text="item.text" 
-				  :time="item.id"
-				  @setOk="setOk"
-				  @deleteItem="deleteItem"
-				/>
+				<view class="item" v-for="(item,index) in list" :id="'listItem' + item.id">
+					<view class="delete-button" @click="deleteItem(item.id)">
+						<uni-icons type="closeempty" :size="rpx2px(80)" color="white"></uni-icons>
+					</view>
+					<Item
+					  :ok='item.ok' 
+					  :text="item.text" 
+					  :time="item.id"
+					  @setOk="setOk"
+					/>
+				</view>
 			</view>
 		</scroll-view>
 	</view>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, defineAsyncComponent } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
+import listData from '../../test/list'
 import AddItem from '../../components/AddItem/AddItem.vue'
 import FirstLoad from '../../util/FirstLoad'
 import IItemData from '../../interface/IItemData'
@@ -41,7 +45,7 @@ const rpx2px = (rpx: number): number => {
 }
 const screenHeight = ref(0)
 const systemBarHeight = ref(0)
-const list = ref()
+const list = reactive([])
 const addShow = ref(false)
 uni.$on('systemBarHeight', (res): void => {
 	systemBarHeight.value = res
@@ -49,10 +53,14 @@ uni.$on('systemBarHeight', (res): void => {
 uni.getStorage({
 	key: 'todo',
 	success: (res: unknown) => {
-		list.value = res.data
+		res.data.forEach((item) => {
+			list.push(item)
+		})
 	},
 	fail: () => {
-		list.value = listData
+		listData.forEach((item) => {
+			list.push(item)
+		})
 	}
 })
 
@@ -65,25 +73,31 @@ onMounted(() => {
 })
 
 const setOk = (id: number, isOk: boolean): void => {
-	for(let i = 0; i < list.value.length; i++) {
-		if (list.value[i].id === id) {
-			list.value[i].ok = isOk
+	for(let i = 0; i < list.length; i++) {
+		if (list[i].id === id) {
+			list[i].ok = isOk
 		}
 	}
 	uni.setStorage({
 		key: 'todo',
-		data: list.value
+		data: list
 	})
 }
 const deleteItem = (id: number): void => {
-	for (let i = 0; i < list.value.length; i++) {
-	    if (list.value[i].id === id) {
-			list.value.splice(i, 1)
+	let delete_index = id
+	let newArray = []
+	for (let i = 0, len = list.length; i < len; i++) {
+	    if (list[i].id != delete_index) {
+	        newArray.push(list[i])
 	    }
 	}
+	list.length = 0
+	newArray.forEach((item) => {
+		list.push(item)
+	})
 	uni.setStorage({
 		key: 'todo',
-		data: list.value,
+		data: list
 	})
 }
 const add = () => {
@@ -91,10 +105,10 @@ const add = () => {
 }
 
 const addItem = (item: IItemData) => {
-	list.value.unshift(item)
+	list.unshift(item)
 	uni.setStorage({
 		key: 'todo',
-		data: list.value,
+		data: list,
 	})
 	addShow.value = false
 }
@@ -117,5 +131,32 @@ const addItemShow = () => {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+.item {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
+	.delete-button {
+		position: absolute;
+		right: 30rpx;
+		background-color: #d6010f;;
+		color: white;
+		width: 140rpx;
+		border-radius: 10rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: inset 0 0 5rpx #00000050;
+		margin-top: -15rpx;
+		z-index: 5;
+		height: 130rpx;
+		
+		&:active {
+			background-color: #b6000b;
+		}
+	}
 }
 </style>

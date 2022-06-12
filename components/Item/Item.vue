@@ -1,6 +1,6 @@
 <template>
 	<movable-area :style="{height: itemHeight + 'px'}">
-		<view class="ok-button" :style="{height: itemHeight - 1 + 'px'}" @click="buttonClick(true)">
+		<view class="ok-button" @click="buttonClick(true)">
 			<uni-icons type="checkmarkempty" :size="rpx2px(80)" color="white"></uni-icons>
 		</view>
 		<movable-view :damping="50" :out-of-bounds="true" :x="x" direction="horizontal" @change="itemChange">
@@ -16,9 +16,6 @@
 				</text>
 			</view>
 		</movable-view>
-		<view class="close-button" :style="{height: itemHeight - 1 + 'px'}" @click="buttonClick(false)">
-			<uni-icons type="closeempty" :size="rpx2px(80)" color="white"></uni-icons>
-		</view>
 	</movable-area>
 </template>
 
@@ -29,14 +26,14 @@ const rpx2px = (rpx: number): number => {
 	return uni.upx2px(rpx)
 }
 const itemRef = ref(null)
-const x = ref(rpx2px(150))
+const x = ref(0)
 const props = defineProps({
 	ok: {
 		type: Boolean,
 		default: false
 	},
 	time: Number,
-	text: String
+	text: String,
 })
 const isOk = ref(props.ok)
 const itemHeight = ref(0)
@@ -50,6 +47,7 @@ const getItemHeight = () => {
 
 watchEffect(() => {
 	isOk.value = props.ok
+	x.value = rpx2px(150)
 })
 
 onMounted(() => {
@@ -60,7 +58,7 @@ onUpdated(() => {
 })
 
 const emits = defineEmits<{
-	(e: 'setOk', id: number, isOk: boolean): void
+	(e: 'setOk', id: number, isOk: boolean): void,
 	(e: 'deleteItem', id: number): void
 }>()
 const buttonClick = (use: boolean): void => {

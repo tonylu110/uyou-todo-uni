@@ -1,6 +1,9 @@
 movable-area {
 	width: 1000rpx;
 	margin-bottom: 30rpx;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	
 	.ok-button {
 		position: absolute;
@@ -14,19 +17,10 @@ movable-area {
 		justify-content: center;
 		box-shadow: inset 0 0 5rpx #00000050;
 		margin-top: 1rpx;
+		height: 130rpx;
 		
 		&:active {
 			background-color: #008600;
-		}
-	}
-	
-	.close-button {
-		@extend .ok-button;
-		left: 709rpx;
-		background-color: #d6010f;
-		
-		&:active {
-			background-color: #b6000b;
 		}
 	}
 	
