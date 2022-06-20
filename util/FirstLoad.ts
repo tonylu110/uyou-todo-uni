@@ -1,4 +1,4 @@
-import list from '../test/list'
+import i18n from '../i18n'
 
 const FirstLoad = (): void => {
 	uni.getStorage({
@@ -6,7 +6,7 @@ const FirstLoad = (): void => {
 		fail: (res: unknown): void => {
 			uni.setStorage({
 				key: 'todo',
-				data: list
+				data: i18n().list
 			})
 		}
 	})

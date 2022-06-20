@@ -1,24 +1,29 @@
+const copyText = '複製成功'
+
 const list = [
     {
-        text: '欢迎使用 uyou ToDo',
+        text: '歡迎使用 uyou ToDo',
         id: new Date().getTime(),
         ok: false
     },
     {
-        text: '将 ToDo 项往右拖动，完成 ToDo',
+        text: '將 ToDo 項往右拖動，完成 ToDo',
         id: new Date().getTime() + 1,
         ok: false
     },
     {
-        text: '将 ToDo 项往左拖动，删除 ToDo',
+        text: '將 ToDo 項往左拖動，刪除 ToDo',
         id: new Date().getTime() + 3,
         ok: false
     },
     {
-        text: '长按 ToDo 项，即可复制 ToDo 内容',
+        text: '長按 ToDo 項，即可複製 ToDo 內容',
         id: new Date().getTime() + 4,
         ok: false
     }
 ]
 
-export default list
+export default {
+	list,
+	copyText
+}

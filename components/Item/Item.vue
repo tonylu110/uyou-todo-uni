@@ -16,13 +16,14 @@
 				</text>
 			</view>
 		</movable-view>
-		<Toast v-if="copySuccess" msg="复制成功" />
+		<Toast v-if="copySuccess" :msg="i18n().copyText" />
 	</movable-area>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, watchEffect, onUpdated } from 'vue'
 import getTime from '../../util/getTime'
+import i18n from '../../i18n'
 const rpx2px = (rpx: number): number => {
 	return uni.upx2px(rpx)
 }

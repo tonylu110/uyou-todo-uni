@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue'
-import listData from '../../test/list'
+import i18n from '../../i18n'
 import AddItem from '../../components/AddItem/AddItem.vue'
 import FirstLoad from '../../util/FirstLoad'
 import IItemData from '../../interface/IItemData'
@@ -55,12 +55,12 @@ uni.$on('systemBarHeight', (res): void => {
 uni.getStorage({
 	key: 'todo',
 	success: (res: unknown) => {
-		res.data.forEach((item) => {
-			list.push(item)
-		})
+		for (let i = 0; i < res.data.length; i++) {
+			list.push(res.data[i])
+		}
 	},
 	fail: () => {
-		listData.forEach((item) => {
+		i18n().list.forEach((item) => {
 			list.push(item)
 		})
 	}
