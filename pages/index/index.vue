@@ -1,13 +1,14 @@
 <template>
 	<view class="content">
 		<TitleBar 
-		  :showBackButton="false" 
+		  :showBackButton="true" 
 		  :showRightButton="true"
 		  title="uyou Todo" 
 		  bgColor="#7a695c" 
 		  fontColor="#fff"
 		  navShadowColor="90"
-		  @addShow="add"
+		  @right="add"
+		  @left="gotoSetting"
 		/>
 		<scroll-view scroll-y="true" :style="{height: screenHeight - systemBarHeight - rpx2px(101) + 'px'}">
 			<view class="scroll-in">
@@ -121,6 +122,12 @@ const addItem = (item: IItemData) => {
 
 const addItemShow = () => {
 	addShow.value = false
+}
+
+const gotoSetting = () => {
+	uni.navigateTo({
+		url: '../setting/setting'
+	})
 }
 </script>
 

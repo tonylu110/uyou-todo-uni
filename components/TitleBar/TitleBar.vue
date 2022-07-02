@@ -3,7 +3,7 @@
 		<view class="system_bar" :style="{height: systemBarHeight + 'px', backgroundColor: bgColor}"></view>
 		<view class="navigator_bar" :style="{boxShadow: '0px 0px 30px #000000' + navShadowColor, backgroundColor: bgColor, color: fontColor}">
 			<view class="button" v-if="showBackButton" @click="left()">
-				<uni-icons type="arrow-left" size="24" :color="fontColor"></uni-icons>
+				<uni-icons :type="leftImg" size="24" :color="fontColor"></uni-icons>
 			</view>
 			<view class="" style="width: 30px;" v-if="!showBackButton"></view>
 			{{ title }}
@@ -41,6 +41,10 @@ const props = defineProps({
 	fontColor: {
 		type: String,
 		default: 'black'
+	},
+	leftImg: {
+		type: String,
+		default: 'gear-filled'
 	}
 })
 const systemBarHeight = ref(0)
@@ -53,13 +57,14 @@ onMounted(() => {
 	})
 })
 const emits = defineEmits<{
-	(e: 'addShow'): void
+	(e: 'right'): void,
+	(e: 'left'): void,
 }>()
 const left = () => {
-	uni.navigateBack({})
+	emits('left')
 }
 const right = () => {
-	emits('addShow')
+	emits('right')
 }
 </script>
 
