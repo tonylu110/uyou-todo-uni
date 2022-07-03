@@ -73,11 +73,11 @@ const right = () => {
 		position: relative;
 		width: 750rpx;
 		background-color: white;
-		z-index: 11;
+		z-index: 101;
 	}
 	.navigator_bar{
 		position: relative;
-		z-index: 10;
+		z-index: 100;
 		width: 700rpx;
 		height: 100rpx;
 		background-color: white;
