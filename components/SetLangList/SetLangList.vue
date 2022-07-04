@@ -1,6 +1,6 @@
 <template>
 	<view class="lang-menu">
-		<view @click="setLang()">跟随系统</view>
+		<view @click="setLang()">{{ i18n().setLangText }}</view>
 		<view @click="setLang()">English</view>
 		<view @click="setLang()">中文（简体）</view>
 		<view @click="setLang()">中文（繁體）</view>
@@ -9,13 +9,15 @@
 </template>
 
 <script setup lang="ts">
+import i18n from '../../i18n'
+	
 const emits = defineEmits<{
 	(e: 'showLangSet')
 }>()
 
-const setLang = () => [
+const setLang = () => {
 	emits('showLangSet')
-]
+}
 </script>
 
 <style lang="scss">
@@ -38,7 +40,8 @@ const setLang = () => [
 	    cursor: pointer;
 
 	    &:active {
-		    background-color: #00000030;
+		    background-color: #5985eb;
+			color: white;
 	    }  
     }
 }

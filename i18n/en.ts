@@ -1,4 +1,6 @@
 const copyText = 'Copy successfully'
+const settingTitle = 'Setting'
+const setLangText = 'Auto'
 
 const list = [
     {
@@ -25,5 +27,7 @@ const list = [
 
 export default {
 	list,
-	copyText
+	copyText,
+	settingTitle,
+	setLangText
 }

@@ -3,7 +3,7 @@
 		<TitleBar
 		  :showBackButton="true" 
 		  :showRightButton="false"
-		  title="设置" 
+		  :title="i18n().settingTitle" 
 		  bgColor="#7a695c" 
 		  fontColor="#fff"
 		  navShadowColor="90"
@@ -28,6 +28,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import i18n from '../../i18n'
+
 const rpx2px = (rpx: number): number => {
 	return uni.upx2px(rpx)
 }
