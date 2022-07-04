@@ -16,9 +16,11 @@
 					<image src="../../static/todo_list.png" mode="aspectFit"></image>
 					<text>uyou ToDo v1.0.2</text>
 				</view>
-				<view class="setting-item lang-set">
+				<view class="setting-item lang-set" @click="showLangSet">
 					<image src="../../static/lang.png" mode="aspectFill" class="lang-img"></image>
 				</view>
+				<SetLangList @showLangSet="showLangSet" v-if="isShowLangSet" />
+				<view v-if="isShowLangSet" @click="showLangSet" class="black-back"></view>
 			</view>
 		</scroll-view>
 	</view>
@@ -45,6 +47,11 @@ onMounted(() => {
 const back = () => {
 	uni.navigateBack()
 }
+
+const isShowLangSet = ref(false)
+const showLangSet = () => [
+	isShowLangSet.value = !isShowLangSet.value
+]
 </script>
 
 <style lang="scss">

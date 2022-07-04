@@ -13,5 +13,11 @@
 </script>
 
 <style>
-	/*每个页面公共css */
+.black-back {
+	background-color: #00000030;
+	height: 100%;
+	width: 750rpx;
+	position: fixed;
+	top: 50px;
+}
 </style>
