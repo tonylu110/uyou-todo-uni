@@ -1,10 +1,9 @@
 <template>
 	<view class="lang-menu">
-		<view @click="setLang()">{{ i18n().setLangText }}</view>
-		<view @click="setLang()">English</view>
-		<view @click="setLang()">中文（简体）</view>
-		<view @click="setLang()">中文（繁體）</view>
-		<view @click="setLang()">日本語</view>
+		<view @click="setLang('auto')">{{ i18n().setLangText }}</view>
+		<view @click="setLang('en')">English</view>
+		<view @click="setLang('zh-Hans')">中文（简体）</view>
+		<view @click="setLang('zh-Hant')">中文（繁體）</view>
 	</view>
 </template>
 
@@ -15,7 +14,8 @@ const emits = defineEmits<{
 	(e: 'showLangSet')
 }>()
 
-const setLang = () => {
+const setLang = (lang: string) => {
+	uni.setLocale(lang)
 	emits('showLangSet')
 }
 </script>
