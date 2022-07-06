@@ -5,7 +5,7 @@
 		</view>
 		<textarea :ref="todoInputRef" class="add-item-text" maxlength="-1" :auto-height="true" :auto-focus="true" v-model="todoText"></textarea>
 		<view class="buttons" @click="clickAddButton">
-			<view class="add-button">
+			<view class="add-button" v-if="todoText !== ''">
 				<uni-icons type="checkmarkempty" size="25" color="white"></uni-icons>
 			</view>
 			<view class="cancel-button" @click="clickCancelButton()">
