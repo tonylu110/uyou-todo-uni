@@ -78,7 +78,7 @@ onMounted(() => {
 		success: (res) => {
 			const version = 102
 			if (version < res.data[0].code) {
-				let updateString: string = ''
+				let updateString: string = i18n().newVersion + res.data[0].version + '\n'
 				res.data[0].data.forEach((item) => {
 					updateString = updateString + item + '\n'
 				})

@@ -2,6 +2,7 @@ const copyText = '複製成功'
 const settingTitle = '設定'
 const setLangText = '跟隨系統'
 const updateText = '更新'
+const newVersion = '新版本：'
 
 const list = [
     {
@@ -31,5 +32,6 @@ export default {
 	copyText,
 	settingTitle,
 	setLangText,
-	updateText
+	updateText,
+	newVersion
 }
