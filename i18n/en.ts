@@ -1,6 +1,7 @@
 const copyText = 'Copy successfully'
 const settingTitle = 'Setting'
 const setLangText = 'Auto'
+const updateText = 'Update'
 
 const list = [
     {
@@ -29,5 +30,6 @@ export default {
 	list,
 	copyText,
 	settingTitle,
-	setLangText
+	setLangText,
+	updateText
 }

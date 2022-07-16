@@ -73,6 +73,27 @@ onMounted(() => {
 			screenHeight.value = res.screenHeight
 		}
 	})
+	uni.request({
+		url: 'http://api.todo.uyou.org.cn/update/get',
+		success: (res) => {
+			const version = 102
+			if (version < res.data[0].code) {
+				let updateString: string = ''
+				res.data[0].data.forEach((item) => {
+					updateString = updateString + item + '\n'
+				})
+				uni.showModal({
+					title: i18n().updateText,
+					content: updateString,
+					success: (res) => {
+						if (res.confirm) {
+							plus.runtime.openURL('https://github.com/tonylu110/uyou-todo-uni/releases')
+						}
+					}
+				})
+			}
+		}
+	})
 })
 
 const setOk = (id: number, isOk: boolean): void => {
