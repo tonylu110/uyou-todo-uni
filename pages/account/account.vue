@@ -3,7 +3,7 @@
 		<TitleBar
 		  :showBackButton="true" 
 		  :showRightButton="false"
-		  :title="i18n().settingTitle" 
+		  title="账号" 
 		  bgColor="#7a695c" 
 		  fontColor="#fff"
 		  navShadowColor="90"
@@ -12,19 +12,9 @@
 		/>
 		<scroll-view scroll-y="true" :style="{height: screenHeight - systemBarHeight - rpx2px(101) + 'px'}">
 			<view class="scroll-in">
-				<view class="setting-title">
-					<image src="../../static/todo_list.png" mode="aspectFit"></image>
-					<text>uyou ToDo v1.0.2</text>
-				</view>
 				<view class="setting-item" @click="toAccount">
 					<text>未登录</text>
-					<uni-icons type="forward" size="25"></uni-icons>
 				</view>
-				<view class="setting-item lang-set" @click="showLangSet">
-					<image src="../../static/lang.png" mode="aspectFill" class="lang-img"></image>
-				</view>
-				<SetLangList @showLangSet="showLangSet" v-if="isShowLangSet" />
-				<view v-if="isShowLangSet" @click="showLangSet" class="black-back"></view>
 			</view>
 		</scroll-view>
 	</view>
@@ -32,8 +22,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import i18n from '../../i18n'
-
+	
 const rpx2px = (rpx: number): number => {
 	return uni.upx2px(rpx)
 }
@@ -49,20 +38,9 @@ onMounted(() => {
 		}
 	})
 })
-
+	
 const back = () => {
 	uni.navigateBack()
-}
-
-const isShowLangSet = ref(false)
-const showLangSet = () => [
-	isShowLangSet.value = !isShowLangSet.value
-]
-
-const toAccount = () => {
-	uni.navigateTo({
-		url: '../account/account'
-	})
 }
 </script>
 
@@ -81,29 +59,6 @@ const toAccount = () => {
 	align-items: center;
 	padding-top: 20rpx;
 	
-	.setting-title {
-		width: 590rpx;
-		height: 250rpx;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		background-color: #FFF;
-		border-radius: 14rpx;
-		padding: 60rpx;
-		margin-bottom: 25rpx;
-		box-shadow: 0 2px 10px #00000030;
-		
-		image {
-		    height: 100%;
-		}
-		
-		text {
-		    margin-top: 15px;
-		    color: #00000050;
-		}
-	}
-	
 	.setting-item {
 	    width: 650rpx;
 	    height: 60rpx;
@@ -120,21 +75,6 @@ const toAccount = () => {
 	    &:active {
 	        background-color: #5985eb;
 	        color: white;
-	    }
-	
-	    .lang-img {
-	        max-height: 120rpx;
-			width: 100%;
-	    }
-	
-	    &.lang-set {
-	        padding: 0px;
-	        height: 120rpx;
-	        width: 710rpx;
-	        display: flex;
-	        flex-direction: row;
-	        justify-content: center;
-			align-items: center;
 	    }
 	}
 }

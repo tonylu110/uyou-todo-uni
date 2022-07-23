@@ -2,8 +2,8 @@
     "name" : "uyou todo",
     "appid" : "__UNI__1579B5E",
     "description" : "",
-    "versionName" : "1.0.2",
-    "versionCode" : 101,
+    "versionName" : "1.1.0",
+    "versionCode" : 110,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {

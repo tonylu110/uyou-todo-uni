@@ -15,6 +15,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/account/account",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
