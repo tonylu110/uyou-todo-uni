@@ -14,10 +14,10 @@
 			<view class="scroll-in">
 				<view class="setting-title">
 					<image src="../../static/todo_list.png" mode="aspectFit"></image>
-					<text>uyou ToDo v1.0.2</text>
+					<text>uyou ToDo v1.1.0</text>
 				</view>
 				<view class="setting-item" @click="toAccount">
-					<text>未登录</text>
+					<text>{{ loginState ? '我的账号' : '未登录' }}</text>
 					<uni-icons type="forward" size="25"></uni-icons>
 				</view>
 				<view class="setting-item lang-set" @click="showLangSet">
@@ -31,6 +31,7 @@
 </template>
 
 <script setup lang="ts">
+import { onShow } from '@dcloudio/uni-app'
 import { ref, onMounted } from 'vue'
 import i18n from '../../i18n'
 
@@ -42,10 +43,26 @@ const systemBarHeight = ref(0)
 uni.$on('systemBarHeight', (res): void => {
 	systemBarHeight.value = res
 })
+
+const loginState = ref(false)
+
 onMounted(() => {
 	uni.getSystemInfo({
 		success: (res: unknown): void => {
 			screenHeight.value = res.screenHeight
+		}
+	})
+})
+
+onShow(() => {
+	uni.getStorage({
+		key: 'uid',
+		success: (res) => {
+			if (res.data !== '') {
+				loginState.value = true
+			} else {
+				loginState.value = false
+			}
 		}
 	})
 })
