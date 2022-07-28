@@ -37,6 +37,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
 import i18n from '../../i18n'
 import AddItem from '../../components/AddItem/AddItem.vue'
 import FirstLoad from '../../util/FirstLoad'
@@ -53,18 +54,21 @@ const setX = ref(0)
 uni.$on('systemBarHeight', (res): void => {
 	systemBarHeight.value = res
 })
-uni.getStorage({
-	key: 'todo',
-	success: (res: unknown) => {
-		for (let i = 0; i < res.data.length; i++) {
-			list.push(res.data[i])
+onShow(() => {
+	list.length = 0
+	uni.getStorage({
+		key: 'todo',
+		success: (res: unknown) => {
+			for (let i = 0; i < res.data.length; i++) {
+				list.push(res.data[i])
+			}
+		},
+		fail: () => {
+			i18n().list.forEach((item) => {
+				list.push(item)
+			})
 		}
-	},
-	fail: () => {
-		i18n().list.forEach((item) => {
-			list.push(item)
-		})
-	}
+	})
 })
 
 onMounted(() => {
