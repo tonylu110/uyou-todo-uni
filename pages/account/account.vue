@@ -112,6 +112,77 @@ const login = () => {
 				loginState.value = true
 				uname.value = ''
 				passwd.value = ''
+				uni.showToast({
+					title: '同步数据',
+					icon: 'loading'
+				})
+				uni.request({
+					url: 'https://api.todo.uyou.org.cn/todoexist',
+					data: {
+						uid: res.data._id
+					},
+					success: (resto) => {
+						if (resto.data.code === 200) {
+							uni.getStorage({
+								key: 'todo',
+								success: (todo) => {
+									uni.request({
+										url: 'https://api.todo.uyou.org.cn/addtodo',
+										method: 'POST',
+										header: {
+											'Content-Type': 'application/json'
+										},
+										data: {
+											uid: res.data._id,
+											data: todo.data
+										},
+										success: (res) => {
+											if (res.data.code === 200) {
+												uni.showToast({
+													title: '同步成功',
+													icon: 'success'
+												})
+											} else {
+												uni.showToast({
+													title: '同步失败',
+													icon: 'error'
+												})
+											}
+										}
+									})
+								}
+							})
+						} else {
+							uni.request({
+								url: 'https://api.todo.uyou.org.cn/gettodo',
+								method: 'POST',
+								header: {
+									'Content-Type': 'application/json'
+								},
+								data: {
+									uid: res.data._id
+								},
+								success: (res) => {
+									if (res.data._id) {
+										uni.showToast({
+											title: '同步成功',
+											icon: 'success'
+										})
+										uni.setStorage({
+											key: 'todo',
+											data: JSON.parse(res.data.data).data
+										})
+									} else {
+										uni.showToast({
+											title: '同步失败',
+											icon: 'error'
+										})
+									}
+								}
+							})
+						}
+					}
+				})
 			} else {
 				uni.showModal({
 					content: '账号或密码错误',
