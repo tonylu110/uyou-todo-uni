@@ -9,6 +9,7 @@
 		  navShadowColor="90"
 		  @right="add"
 		  @left="gotoSetting"
+		  @sync="sync"
 		/>
 		<scroll-view scroll-y="true" :style="{height: screenHeight - systemBarHeight - rpx2px(101) + 'px'}">
 			<view class="scroll-in">
@@ -71,32 +72,47 @@ onShow(() => {
 	})
 })
 
+const syncData = (uid) => {
+	uni.request({
+		url: 'https://api.todo.uyou.org.cn/gettodo',
+		method: 'POST',
+		header: {
+			'Content-Type': 'application/json'
+		},
+		data: {
+			uid: uid.data
+		},
+		success: (res) => {
+			uni.setStorage({
+				key: 'todo',
+				data: JSON.parse(res.data.data).data
+			})
+			list.length = 0
+			for (let i = 0; i < JSON.parse(res.data.data).data.length; i++) {
+				list.push(JSON.parse(res.data.data).data[i])
+			}
+		}
+	})
+}
+
+const sync = () => {
+	uni.getStorage({
+		key: 'uid',
+		success: (uid) => {
+			if (uid.data !== '') {
+				syncData(uid)
+			}
+		}
+	})
+}
+
 onLoad(() => {
 	const autoSync = uni.getStorageSync('autoSync')
 	uni.getStorage({
 		key: 'uid',
 		success: (uid) => {
-			if (uid.data !== '' && autoSync) {
-				uni.request({
-					url: 'https://api.todo.uyou.org.cn/gettodo',
-					method: 'POST',
-					header: {
-						'Content-Type': 'application/json'
-					},
-					data: {
-						uid: uid.data
-					},
-					success: (res) => {
-						uni.setStorage({
-							key: 'todo',
-							data: JSON.parse(res.data.data).data
-						})
-						list.length = 0
-						for (let i = 0; i < JSON.parse(res.data.data).data.length; i++) {
-							list.push(JSON.parse(res.data.data).data[i])
-						}
-					}
-				})
+			if (uid.data !== '' && (autoSync || autoSync === '')) {
+				syncData(uid)
 			}
 		}
 	})

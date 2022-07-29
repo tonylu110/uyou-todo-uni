@@ -8,6 +8,9 @@
 			<view class="" style="width: 30px;" v-if="!showBackButton"></view>
 			{{ title }}
 			<view class="" style="width: 30px;" v-if="!showRightButton"></view>
+			<view class="button sync" v-if="showRightButton && syncButtonShow" @click="emits('sync')">
+				<uni-icons type="refresh" size="26" :color="fontColor"></uni-icons>
+			</view>
 			<view class="button" v-if="showRightButton" @click="right()">
 				<uni-icons type="plusempty" size="24" :color="fontColor"></uni-icons>
 			</view>
@@ -16,6 +19,7 @@
 </template>
 
 <script setup lang="ts">
+import { onShow } from '@dcloudio/uni-app'
 import { ref, onMounted } from 'vue'
 const props = defineProps({
 	showBackButton: {
@@ -59,6 +63,7 @@ onMounted(() => {
 const emits = defineEmits<{
 	(e: 'right'): void,
 	(e: 'left'): void,
+	(e: 'sync'): void
 }>()
 const left = () => {
 	emits('left')
@@ -66,6 +71,24 @@ const left = () => {
 const right = () => {
 	emits('right')
 }
+
+const syncButtonShow = ref(false)
+
+onShow(() => {
+	uni.getStorage({
+		key: 'uid',
+		success: (res) => {
+			if (res.data !== '') {
+				syncButtonShow.value = true
+			} else {
+				syncButtonShow.value = false
+			}
+		},
+		fail: (res) => {
+			syncButtonShow.value = false
+		}
+	})
+})
 </script>
 
 <style lang="scss">
@@ -99,6 +122,11 @@ const right = () => {
 		
 		&:active {
 			background-color: #00000050;
+		}
+		
+		&.sync {
+			position: absolute;
+			right: 60px;
 		}
 	}
 </style>
