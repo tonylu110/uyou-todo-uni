@@ -25,10 +25,10 @@
 				<view v-if="!loginState" class="setting-item register" @click="openRegister">
 				    <text>注册</text>
 				</view>
-				<!-- <view v-if="loginState" class="setting-item" style="background-color: white; color: black;">
+				<view v-if="loginState" class="setting-item" style="background-color: white; color: black;">
 				    <text>自动同步</text>
-				    <Switch :swichState="swichState" @switch="setAutoSync" />
-				</view> -->
+				    <switch :checked="swichState" @change="setAutoSync" />
+				</view>
 				<view v-if="loginState" class="setting-item logout" @click="logout">
 				    <text>退出登录</text>
 				</view>
@@ -52,6 +52,13 @@ uni.$on('systemBarHeight', (res): void => {
 const loginState = ref(false)
 
 const loginText = ref('未登录')
+
+const swichState = ref(uni.getStorageSync('autoSync') === true || uni.getStorageSync('autoSync') === '')
+
+const setAutoSync = (e) => {
+	uni.setStorageSync('autoSync', e.detail.value)
+	swichState.value = e.detail.value
+}
 
 onMounted(() => {
 	uni.getSystemInfo({

@@ -72,10 +72,11 @@ onShow(() => {
 })
 
 onLoad(() => {
+	const autoSync = uni.getStorageSync('autoSync')
 	uni.getStorage({
 		key: 'uid',
 		success: (uid) => {
-			if (uid.data !== '') {
+			if (uid.data !== '' && autoSync) {
 				uni.request({
 					url: 'https://api.todo.uyou.org.cn/gettodo',
 					method: 'POST',
