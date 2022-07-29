@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue'
-import { onShow } from '@dcloudio/uni-app'
+import { onShow, onLoad } from '@dcloudio/uni-app'
 import i18n from '../../i18n'
 import AddItem from '../../components/AddItem/AddItem.vue'
 import FirstLoad from '../../util/FirstLoad'
@@ -67,6 +67,36 @@ onShow(() => {
 			i18n().list.forEach((item) => {
 				list.push(item)
 			})
+		}
+	})
+})
+
+onLoad(() => {
+	uni.getStorage({
+		key: 'uid',
+		success: (uid) => {
+			if (uid.data !== '') {
+				uni.request({
+					url: 'https://api.todo.uyou.org.cn/gettodo',
+					method: 'POST',
+					header: {
+						'Content-Type': 'application/json'
+					},
+					data: {
+						uid: uid.data
+					},
+					success: (res) => {
+						uni.setStorage({
+							key: 'todo',
+							data: JSON.parse(res.data.data).data
+						})
+						list.length = 0
+						for (let i = 0; i < JSON.parse(res.data.data).data.length; i++) {
+							list.push(JSON.parse(res.data.data).data[i])
+						}
+					}
+				})
+			}
 		}
 	})
 })
