@@ -12,7 +12,7 @@
 		/>
 		<scroll-view scroll-y="true" :style="{height: screenHeight - systemBarHeight - rpx2px(101) + 'px'}">
 			<view class="scroll-in">
-				<view class="setting-item" @click="toAccount">
+				<view class="setting-item">
 					<text>{{ loginText }}</text>
 				</view>
 				<view v-if="!loginState" class="login-input">

@@ -157,6 +157,29 @@ const setOk = (id: number, isOk: boolean): void => {
 		key: 'todo',
 		data: list
 	})
+	uni.getStorage({
+		key: 'uid',
+		success: (uid) => {
+			if (uid.data !== '') {
+				uni.request({
+					url: 'https://api.todo.uyou.org.cn/edittodo',
+					method: 'POST',
+					header: {
+						'Content-Type': 'application/json'
+					},
+					data: {
+						uid: uid.data,
+						data: JSON.stringify({
+							data: list
+						})
+					},
+					success: (res) => {
+						console.log(res.data);
+					}
+				})
+			}
+		}
+	})
 }
 const deleteItem = (id: number): void => {
 	let delete_index = id
@@ -174,6 +197,29 @@ const deleteItem = (id: number): void => {
 		key: 'todo',
 		data: list
 	})
+	uni.getStorage({
+		key: 'uid',
+		success: (uid) => {
+			if (uid.data !== '') {
+				uni.request({
+					url: 'https://api.todo.uyou.org.cn/edittodo',
+					method: 'POST',
+					header: {
+						'Content-Type': 'application/json'
+					},
+					data: {
+						uid: uid.data,
+						data: JSON.stringify({
+							data: list
+						})
+					},
+					success: (res) => {
+						console.log(res.data);
+					}
+				})
+			}
+		}
+	})
 	setX.value = 1
 	setTimeout(() => {
 		setX.value = 0
@@ -188,6 +234,29 @@ const addItem = (item: IItemData) => {
 	uni.setStorage({
 		key: 'todo',
 		data: list,
+	})
+	uni.getStorage({
+		key: 'uid',
+		success: (uid) => {
+			if (uid.data !== '') {
+				uni.request({
+					url: 'https://api.todo.uyou.org.cn/edittodo',
+					method: 'POST',
+					header: {
+						'Content-Type': 'application/json'
+					},
+					data: {
+						uid: uid.data,
+						data: JSON.stringify({
+							data: list
+						})
+					},
+					success: (res) => {
+						console.log(res.data);
+					}
+				})
+			}
+		}
 	})
 	addShow.value = false
 }
