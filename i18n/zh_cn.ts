@@ -3,6 +3,22 @@ const settingTitle = '设置'
 const setLangText = '跟随系统'
 const updateText = '更新'
 const newVersion = '新版本：'
+const loginText = '未登录'
+const myAccount = '我的账号'
+const accountPage = {
+    account: '账号',
+    passwd: '密码',
+    login: '登录',
+    register: '注册',
+    autoSync: '自动同步',
+    logout: '退出登录',
+    alertNoAnP: '请输入账号和密码',
+    syncData: '同步数据',
+    syncSuccess: '同步成功',
+    syncFail: '同步失败',
+    loginError: '登录失败',
+    alertTitle: '提示'
+}
 
 const list = [
     {
@@ -33,5 +49,8 @@ export default {
 	settingTitle,
 	setLangText,
 	updateText,
-	newVersion
+	newVersion,
+	accountPage,
+	loginText,
+	myAccount
 }

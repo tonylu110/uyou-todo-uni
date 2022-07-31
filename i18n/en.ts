@@ -3,6 +3,22 @@ const settingTitle = 'Setting'
 const setLangText = 'Auto'
 const updateText = 'Update'
 const newVersion = 'New Version: '
+const loginText = 'Not logged in'
+const myAccount = 'My Account'
+const accountPage = {
+    account: 'Account',
+    passwd: 'Password',
+    login: 'Log in',
+    register: 'Register',
+    autoSync: 'Automatic sync',
+    logout: 'Log out',
+    alertNoAnP: 'Please enter account and password',
+    syncData: 'Synchronous Data',
+    syncSuccess: 'Sync succeeded',
+    syncFail: 'Sync failed',
+    loginError: 'Login failed',
+    alertTitle: 'Hint'
+}
 
 const list = [
     {
@@ -33,5 +49,8 @@ export default {
 	settingTitle,
 	setLangText,
 	updateText,
-	newVersion
+	newVersion,
+	accountPage,
+	loginText,
+	myAccount
 }

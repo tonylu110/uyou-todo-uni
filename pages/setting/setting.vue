@@ -17,7 +17,7 @@
 					<text>uyou ToDo v1.1.0</text>
 				</view>
 				<view class="setting-item" @click="toAccount">
-					<text>{{ loginState ? '我的账号' : '未登录' }}</text>
+					<text>{{ loginState ? i18n().myAccount : i18n().loginText }}</text>
 					<uni-icons type="forward" size="25"></uni-icons>
 				</view>
 				<view class="setting-item lang-set" @click="showLangSet">

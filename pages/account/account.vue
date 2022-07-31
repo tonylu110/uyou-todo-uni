@@ -3,7 +3,7 @@
 		<TitleBar
 		  :showBackButton="true" 
 		  :showRightButton="false"
-		  title="账号" 
+		  :title="i18n().accountPage.account" 
 		  bgColor="#7a695c" 
 		  fontColor="#fff"
 		  navShadowColor="90"
@@ -16,21 +16,21 @@
 					<text>{{ loginText }}</text>
 				</view>
 				<view v-if="!loginState" class="login-input">
-				    <input type="text" placeholder="账号" v-model="uname">
-				    <input type="password" placeholder="密码" v-model="passwd">
+				    <input type="text" :placeholder="i18n().accountPage.account" v-model="uname">
+				    <input type="password" :placeholder="i18n().accountPage.passwd" v-model="passwd">
 				</view>
 				<view v-if="!loginState" class="setting-item login" @click="login">
-				    <text>登录</text>
+				    <text>{{ i18n().accountPage.login }}</text>
 				</view>
 				<view v-if="!loginState" class="setting-item register" @click="openRegister">
-				    <text>注册</text>
+				    <text>{{ i18n().accountPage.register }}</text>
 				</view>
 				<view v-if="loginState" class="setting-item" style="background-color: white; color: black;">
-				    <text>自动同步</text>
+				    <text>{{ i18n().accountPage.autoSync }}</text>
 				    <switch :checked="swichState" @change="setAutoSync" />
 				</view>
 				<view v-if="loginState" class="setting-item logout" @click="logout">
-				    <text>退出登录</text>
+				    <text>{{ i18n().accountPage.logout }}</text>
 				</view>
 			</view>
 		</scroll-view>
@@ -39,6 +39,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watchEffect } from 'vue'
+import i18n from '../../i18n'
 	
 const rpx2px = (rpx: number): number => {
 	return uni.upx2px(rpx)
@@ -51,7 +52,7 @@ uni.$on('systemBarHeight', (res): void => {
 
 const loginState = ref(false)
 
-const loginText = ref('未登录')
+const loginText = ref(i18n().loginText)
 
 const swichState = ref(uni.getStorageSync('autoSync') === true || uni.getStorageSync('autoSync') === '')
 
@@ -120,7 +121,7 @@ const login = () => {
 				uname.value = ''
 				passwd.value = ''
 				uni.showToast({
-					title: '同步数据',
+					title: i18n().accountPage.syncData,
 					icon: 'loading'
 				})
 				uni.request({
@@ -146,12 +147,12 @@ const login = () => {
 										success: (res) => {
 											if (res.data.code === 200) {
 												uni.showToast({
-													title: '同步成功',
+													title: i18n().accountPage.syncSuccess,
 													icon: 'success'
 												})
 											} else {
 												uni.showToast({
-													title: '同步失败',
+													title: i18n().accountPage.syncFail,
 													icon: 'error'
 												})
 											}
@@ -172,7 +173,7 @@ const login = () => {
 								success: (res) => {
 									if (res.data._id) {
 										uni.showToast({
-											title: '同步成功',
+											title: i18n().accountPage.syncSuccess,
 											icon: 'success'
 										})
 										uni.setStorage({
@@ -181,7 +182,7 @@ const login = () => {
 										})
 									} else {
 										uni.showToast({
-											title: '同步失败',
+											title: i18n().accountPage.syncFail,
 											icon: 'error'
 										})
 									}
@@ -192,7 +193,7 @@ const login = () => {
 				})
 			} else {
 				uni.showModal({
-					content: '账号或密码错误',
+					content: i18n().accountPage.loginError,
 				})
 			}
 		}
@@ -209,7 +210,7 @@ const logout = () => {
 		data: ''
 	})
 	loginState.value = false
-	loginText.value = '未登录'
+	loginText.value = i18n().accountPage.loginText
 }
 
 const openRegister = () => {
