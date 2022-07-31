@@ -142,9 +142,12 @@ const login = () => {
 										},
 										data: {
 											uid: res.data._id,
-											data: todo.data
+											data: JSON.stringify({
+												data: todo.data
+											})
 										},
 										success: (res) => {
+											console.log(res.data.code);
 											if (res.data.code === 200) {
 												uni.showToast({
 													title: i18n().accountPage.syncSuccess,
@@ -210,7 +213,7 @@ const logout = () => {
 		data: ''
 	})
 	loginState.value = false
-	loginText.value = i18n().accountPage.loginText
+	loginText.value = i18n().loginText
 }
 
 const openRegister = () => {
