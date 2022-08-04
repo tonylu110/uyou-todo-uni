@@ -8,9 +8,14 @@
 		  fontColor="#fff"
 		  navShadowColor="90"
 		  @right="add"
-		  @left="gotoSetting"
+		  @left="openSidebar"
 		  @sync="sync"
 		/>
+		<Sidebar
+			:openBar="openBar"
+			@toSetting='toSetting'
+		/>
+		<view class="black-back" style="z-index: 101; top: 0" v-if="openBar" @click="openSidebar"></view>
 		<scroll-view scroll-y="true" :style="{height: screenHeight - systemBarHeight - rpx2px(101) + 'px'}">
 			<view class="scroll-in">
 				<view style="height: 30rpx;"></view>
@@ -127,7 +132,7 @@ onMounted(() => {
 	uni.request({
 		url: 'http://api.todo.uyou.org.cn/update/get',
 		success: (res) => {
-			const version = 110
+			const version = 111
 			if (version < res.data[0].code) {
 				let updateString: string = i18n().newVersion + res.data[0].version + '\n'
 				res.data[0].data.forEach((item) => {
@@ -265,10 +270,16 @@ const addItemShow = () => {
 	addShow.value = false
 }
 
-const gotoSetting = () => {
+const openBar = ref(false)
+const openSidebar = () => {
+	openBar.value = !openBar.value
+}
+
+const toSetting = () => {
 	uni.navigateTo({
-		url: '../setting/setting'
+		url: '../setting/setting',
 	})
+	openBar.value = !openBar.value
 }
 </script>
 

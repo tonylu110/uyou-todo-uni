@@ -19,5 +19,6 @@
 	width: 750rpx;
 	position: fixed;
 	top: 50px;
+	backdrop-filter: blur(10px);
 }
 </style>

@@ -48,7 +48,7 @@ const props = defineProps({
 	},
 	leftImg: {
 		type: String,
-		default: 'gear-filled'
+		default: 'bars'
 	}
 })
 const systemBarHeight = ref(0)
