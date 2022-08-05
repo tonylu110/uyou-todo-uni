@@ -1,18 +1,24 @@
 <template>
-	<view class="menu" :style="{transform: openBar ? '' : 'translateX(-550rpx)'}">
+	<view class="menu" :style="{transform: openBar ? '' : 'translateX(-555rpx)'}">
 		<view class="list">
-			
+			<text class="title t1">{{ i18n().accountPage.account }}</text>
+			<view class="account-list" @click="emits('toAccount')">
+				<uni-icons type="gear-filled" size="40" color="#00000070"></uni-icons>
+				<text class="text">{{ i18n().myAccount }}</text>
+			</view>
 		</view>
 		<view class="list">
 			<view class="setting-list" @click="emits('toSetting')">
 				<uni-icons type="gear-filled" size="40" color="#00000070"></uni-icons>
-				<text class="text">设置</text>
+				<text class="text">{{ i18n().settingTitle }}</text>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script setup lang="ts">
+import i18n from '../../i18n'
+	
 defineProps({
 	openBar: {
 		default: false,
@@ -21,7 +27,8 @@ defineProps({
 })
 
 const emits = defineEmits<{
-	(e: 'toSetting')
+	(e: 'toSetting'): void,
+	(e: 'toAccount'): void
 }>()
 </script>
 
@@ -51,10 +58,29 @@ const emits = defineEmits<{
 				margin-left: 20rpx;
 				margin-top: 3rpx;
 				color: #00000070;
+				font-weight: bold;
 			}
 			
 			&:active {
 				background-color: #00000030;
+			}
+		}
+		
+		.account-list {
+			@extend .setting-list;
+			margin-top: 30rpx;
+		}
+		
+		.title {
+			display: block;
+			margin-top: 40rpx;
+			
+			&.t1 {
+				color: #00000070;
+				margin-left: 50rpx;
+				margin-top: 120rpx;
+				font-size: 40rpx;
+				font-weight: bold;
 			}
 		}
 	}

@@ -14,6 +14,7 @@
 		<Sidebar
 			:openBar="openBar"
 			@toSetting='toSetting'
+			@toAccount="toAccount"
 		/>
 		<view class="black-back" style="z-index: 101; top: 0" v-if="openBar" @click="openSidebar"></view>
 		<scroll-view scroll-y="true" :style="{height: screenHeight - systemBarHeight - rpx2px(101) + 'px'}">
@@ -278,6 +279,13 @@ const openSidebar = () => {
 const toSetting = () => {
 	uni.navigateTo({
 		url: '../setting/setting',
+	})
+	openBar.value = !openBar.value
+}
+
+const toAccount = () => {
+	uni.navigateTo({
+		url: '../account/account',
 	})
 	openBar.value = !openBar.value
 }
