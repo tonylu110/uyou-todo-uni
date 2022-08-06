@@ -3,7 +3,7 @@
 		<view class="list">
 			<text class="title t1">{{ i18n().accountPage.account }}</text>
 			<view class="account-list" @click="emits('toAccount')">
-				<uni-icons type="gear-filled" size="40" color="#00000070"></uni-icons>
+				<uni-icons type="person-filled" size="40" color="#00000070"></uni-icons>
 				<text class="text">{{ i18n().myAccount }}</text>
 			</view>
 		</view>
