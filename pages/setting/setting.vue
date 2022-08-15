@@ -14,7 +14,7 @@
 			<view class="scroll-in">
 				<view class="setting-title">
 					<image src="../../static/todo_list.png" mode="aspectFit"></image>
-					<text>uyou ToDo v1.1.0</text>
+					<text>uyou ToDo v{{ version }}</text>
 				</view>
 				<view class="setting-item" @click="toAccount">
 					<text>{{ loginState ? i18n().myAccount : i18n().loginText }}</text>
@@ -34,6 +34,8 @@
 import { onShow } from '@dcloudio/uni-app'
 import { ref, onMounted } from 'vue'
 import i18n from '../../i18n'
+
+const version = uni.getAppBaseInfo().appVersion
 
 const rpx2px = (rpx: number): number => {
 	return uni.upx2px(rpx)
