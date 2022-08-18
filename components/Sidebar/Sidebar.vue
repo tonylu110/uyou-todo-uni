@@ -2,9 +2,18 @@
 	<view class="menu" :style="{transform: openBar ? '' : 'translateX(-555rpx)'}">
 		<view class="list">
 			<text class="title t1">{{ i18n().accountPage.account }}</text>
-			<view class="account-list" @click="emits('toAccount')">
+			<view class="account-list" @click="emits('toAccount')" style="margin-top: 30rpx;">
 				<uni-icons type="person-filled" size="35" color="#00000070"></uni-icons>
 				<text class="text">{{ i18n().myAccount }}</text>
+			</view>
+			<text class="title">分类</text>
+			<view class="account-list" @click="emits('toAccount')" style="margin-top: 30rpx;">
+				<uni-icons type="circle" size="35" color="#00000070"></uni-icons>
+				<text class="text">未完成</text>
+			</view>
+			<view class="account-list" @click="emits('toAccount')">
+				<uni-icons type="circle-filled" size="35" color="#00000070"></uni-icons>
+				<text class="text">已完成</text>
 			</view>
 		</view>
 		<view class="list">
@@ -68,19 +77,19 @@ const emits = defineEmits<{
 		
 		.account-list {
 			@extend .setting-list;
-			margin-top: 30rpx;
+			margin-bottom: 20rpx;
 		}
 		
 		.title {
 			display: block;
-			margin-top: 40rpx;
+			margin-top: 80rpx;
+			font-size: 40rpx;
+			font-weight: bold;
+			margin-left: 50rpx;
+			color: #00000070;
 			
 			&.t1 {
-				color: #00000070;
-				margin-left: 50rpx;
 				margin-top: 160rpx;
-				font-size: 40rpx;
-				font-weight: bold;
 			}
 		}
 	}
