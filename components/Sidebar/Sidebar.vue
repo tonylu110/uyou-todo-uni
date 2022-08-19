@@ -7,11 +7,11 @@
 				<text class="text">{{ i18n().myAccount }}</text>
 			</view>
 			<text class="title">分类</text>
-			<view class="account-list" @click="emits('toAccount')" style="margin-top: 30rpx;">
+			<view class="account-list" @click="toOther('allNotDo')" style="margin-top: 30rpx;">
 				<uni-icons type="circle" size="35" color="#00000070"></uni-icons>
 				<text class="text">未完成</text>
 			</view>
-			<view class="account-list" @click="emits('toAccount')">
+			<view class="account-list" @click="toOther('allDo')">
 				<uni-icons type="circle-filled" size="35" color="#00000070"></uni-icons>
 				<text class="text">已完成</text>
 			</view>
@@ -37,8 +37,16 @@ defineProps({
 
 const emits = defineEmits<{
 	(e: 'toSetting'): void,
-	(e: 'toAccount'): void
+	(e: 'toAccount'): void,
+	(e: 'toOther'): void
 }>()
+
+const toOther = (data: string) => {
+	emits('toOther')
+	uni.navigateTo({
+		url: '../other/other?name=' + data,
+	})
+}
 </script>
 
 <style lang="scss">

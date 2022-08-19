@@ -15,6 +15,7 @@
 			:openBar="openBar"
 			@toSetting='toSetting'
 			@toAccount="toAccount"
+			@toOther="toOther"
 		/>
 		<view class="black-back" style="z-index: 101; top: 0" v-if="openBar" @click="openSidebar"></view>
 		<scroll-view scroll-y="true" :style="{height: screenHeight - systemBarHeight - rpx2px(101) + 'px'}">
@@ -287,6 +288,10 @@ const toAccount = () => {
 	uni.navigateTo({
 		url: '../account/account',
 	})
+	openBar.value = !openBar.value
+}
+
+const toOther = () => {
 	openBar.value = !openBar.value
 }
 </script>
