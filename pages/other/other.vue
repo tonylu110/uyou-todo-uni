@@ -3,7 +3,7 @@
 		<TitleBar 
 		  :showBackButton="true" 
 		  :showRightButton="false"
-		  title="other" 
+		  :title="title" 
 		  bgColor="#7a695c" 
 		  fontColor="#fff"
 		  navShadowColor="90"
@@ -41,6 +41,8 @@ const screenHeight = ref(0)
 const systemBarHeight = ref(0)
 const list = reactive([])
 const setX = ref(0)
+const title = ref('')
+const listData = reactive([])
 uni.$on('systemBarHeight', (res): void => {
 	systemBarHeight.value = res
 })
@@ -58,17 +60,68 @@ onLoad((e) => {
 		key: 'todo',
 		success: (res: unknown) => {
 			for (let i = 0; i < res.data.length; i++) {
+				listData.push(res.data[i])
 				if (res.data[i].ok === (e.name === 'allDo')) {
 					list.push(res.data[i])
 				}
 			}
 		}
 	})
+	if (e.name === 'allDo') {
+		title.value = '已完成'
+	} else {
+		title.value = '未完成'
+	}
 })
 
 const back = () => {
 	uni.navigateBack({
 		
+	})
+}
+
+const setOk = (id: number, isOk: boolean) => {
+	for(let i = 0; i < list.length; i++) {
+		if (list[i].id === id) {
+			list[i].ok = isOk
+		}
+	}
+	for(let i = 0; i < listData.length; i++) {
+		if (listData[i].id === id) {
+			listData[i].ok = isOk
+		}
+	}
+	uni.setStorage({
+		key: 'todo',
+		data: listData
+	})
+	uni.getStorage({
+		key: 'uid',
+		success: (uid) => {
+			if (uid.data !== '') {
+				uni.request({
+					url: 'https://api.todo.uyou.org.cn/edittodo',
+					method: 'POST',
+					header: {
+						'Content-Type': 'application/json'
+					},
+					data: {
+						uid: uid.data,
+						data: JSON.stringify({
+							data: listData
+						})
+					},
+					success: () => {
+						list.length = 0
+						for (let i = 0; i < listData.length; i++) { 
+							if (listData[i].ok === (title.value === 'allDo')) {
+								list.push(listData[i])
+							}
+						}
+					}
+				})
+			}
+		}
 	})
 }
 </script>
