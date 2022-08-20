@@ -22,7 +22,7 @@
 				  @itemFun="toAccount"
 				/>
 				<ItemButton mode="error" @click="clearData">
-					<text>清除数据</text>
+					<text>{{ i18n().clearData }}</text>
 				</ItemButton>
 				<ItemButton @click="showLangSet">
 					<image src="../../static/lang.png" mode="aspectFill" class="lang-img"></image>

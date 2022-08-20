@@ -5,6 +5,14 @@ const updateText = 'Update'
 const newVersion = 'New Version: '
 const loginText = 'Not logged in'
 const myAccount = 'My Account'
+const clearData = 'Clear Data'
+
+const listMenu = {
+    cate: 'Categories',
+    completed: 'Completed',
+    incompleted: 'Incompleted'
+}
+
 const accountPage = {
     account: 'Account',
     passwd: 'Password',
@@ -52,5 +60,7 @@ export default {
 	newVersion,
 	accountPage,
 	loginText,
-	myAccount
+	myAccount,
+	listMenu,
+	clearData
 }

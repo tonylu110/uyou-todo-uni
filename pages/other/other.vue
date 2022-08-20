@@ -33,6 +33,7 @@
 <script lang="ts" setup>
 import { onMounted, ref, reactive } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
+import i18n from '../../i18n'
 
 const rpx2px = (rpx: number): number => {
 	return uni.upx2px(rpx)
@@ -69,9 +70,9 @@ onLoad((e) => {
 		}
 	})
 	if (e.name === 'allDo') {
-		title.value = '已完成'
+		title.value = i18n().listMenu.completed
 	} else {
-		title.value = '未完成'
+		title.value = i18n().listMenu.incompleted
 	}
 	listName.value = e.name
 })

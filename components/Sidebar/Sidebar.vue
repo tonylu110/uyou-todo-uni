@@ -6,14 +6,14 @@
 				<uni-icons type="person-filled" size="35" color="#00000070"></uni-icons>
 				<text class="text">{{ i18n().myAccount }}</text>
 			</view>
-			<text class="title">分类</text>
+			<text class="title">{{ i18n().listMenu.cate }}</text>
 			<view class="account-list" @click="toOther('allNotDo')" style="margin-top: 30rpx;">
 				<uni-icons type="circle" size="35" color="#00000070"></uni-icons>
-				<text class="text">未完成</text>
+				<text class="text">{{ i18n().listMenu.incompleted }}</text>
 			</view>
 			<view class="account-list" @click="toOther('allDo')">
 				<uni-icons type="circle-filled" size="35" color="#00000070"></uni-icons>
-				<text class="text">已完成</text>
+				<text class="text">{{ i18n().listMenu.completed }}</text>
 			</view>
 		</view>
 		<view class="list">

@@ -5,6 +5,14 @@ const updateText = '更新'
 const newVersion = '新版本：'
 const loginText = '未登录'
 const myAccount = '我的账号'
+const clearData = '清除数据'
+
+const listMenu = {
+    cate: '分类',
+    completed: '已完成',
+    incompleted: '未完成'
+}
+
 const accountPage = {
     account: '账号',
     passwd: '密码',
@@ -52,5 +60,7 @@ export default {
 	newVersion,
 	accountPage,
 	loginText,
-	myAccount
+	myAccount,
+	listMenu,
+	clearData
 }
