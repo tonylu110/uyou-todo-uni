@@ -16,13 +16,14 @@
 					<image src="../../static/todo_list.png" mode="aspectFit"></image>
 					<text>uyou ToDo v{{ version }}</text>
 				</view>
-				<view class="setting-item" @click="toAccount">
-					<text>{{ loginState ? i18n().myAccount : i18n().loginText }}</text>
-					<uni-icons type="forward" size="25"></uni-icons>
-				</view>
-				<view class="setting-item lang-set" @click="showLangSet">
+				<Item
+				  :title="loginState ? i18n().myAccount : i18n().loginText"
+				  :showSwitch="false"
+				  @itemFun="toAccount"
+				/>
+				<ItemButton @click="showLangSet">
 					<image src="../../static/lang.png" mode="aspectFill" class="lang-img"></image>
-				</view>
+				</ItemButton>
 				<SetLangList @showLangSet="showLangSet" v-if="isShowLangSet" />
 				<view v-if="isShowLangSet" @click="showLangSet" class="black-back"></view>
 			</view>
@@ -33,6 +34,8 @@
 <script setup lang="ts">
 import { onShow } from '@dcloudio/uni-app'
 import { ref, onMounted } from 'vue'
+import Item from '../../components/ItemBox/Item/Item.vue' 
+import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
 import i18n from '../../i18n'
 
 const version = uni.getAppBaseInfo().appVersion

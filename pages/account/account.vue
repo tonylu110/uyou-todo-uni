@@ -12,26 +12,30 @@
 		/>
 		<scroll-view scroll-y="true" :style="{height: screenHeight - systemBarHeight - rpx2px(101) + 'px'}">
 			<view class="scroll-in">
-				<view class="setting-item">
-					<text>{{ loginText }}</text>
-				</view>
+				<Item
+				  :title="loginText"
+				  :showArrow="false"
+				/>
 				<view v-if="!loginState" class="login-input">
 				    <input type="text" :placeholder="i18n().accountPage.account" v-model="uname">
 				    <input type="password" :placeholder="i18n().accountPage.passwd" v-model="passwd">
 				</view>
-				<view v-if="!loginState" class="setting-item login" @click="login">
-				    <text>{{ i18n().accountPage.login }}</text>
-				</view>
-				<view v-if="!loginState" class="setting-item register" @click="openRegister">
-				    <text>{{ i18n().accountPage.register }}</text>
-				</view>
-				<view v-if="loginState" class="setting-item" style="background-color: white; color: black;">
-				    <text>{{ i18n().accountPage.autoSync }}</text>
-				    <switch :checked="swichState" @change="setAutoSync" />
-				</view>
-				<view v-if="loginState" class="setting-item logout" @click="logout">
-				    <text>{{ i18n().accountPage.logout }}</text>
-				</view>
+				<ItemButton v-if="!loginState" @click="login" mode="primary">
+					<text>{{ i18n().accountPage.login }}</text>
+				</ItemButton>
+				<ItemButton v-if="!loginState" @click="openRegister">
+					<text>{{ i18n().accountPage.register }}</text>
+				</ItemButton>
+				<Item
+				  v-if="loginState"
+				  :title="i18n().accountPage.autoSync"
+				  :switchState="swichState"
+				  :showSwitch="true"
+				  @switchFun="setAutoSync"
+				/>
+				<ItemButton v-if="loginState" @click="logout" mode="error">
+					<text>{{ i18n().accountPage.logout }}</text>
+				</ItemButton>
 			</view>
 		</scroll-view>
 	</view>
@@ -39,6 +43,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watchEffect } from 'vue'
+import Item from '../../components/ItemBox/Item/Item.vue'
+import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
 import i18n from '../../i18n'
 	
 const rpx2px = (rpx: number): number => {
