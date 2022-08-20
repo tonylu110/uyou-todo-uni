@@ -21,6 +21,9 @@
 				  :showSwitch="false"
 				  @itemFun="toAccount"
 				/>
+				<ItemButton mode="error" @click="clearData">
+					<text>清除数据</text>
+				</ItemButton>
 				<ItemButton @click="showLangSet">
 					<image src="../../static/lang.png" mode="aspectFill" class="lang-img"></image>
 				</ItemButton>
@@ -84,6 +87,14 @@ const showLangSet = () => [
 const toAccount = () => {
 	uni.navigateTo({
 		url: '../account/account'
+	})
+}
+
+const clearData = () => {
+	uni.clearStorage()
+	uni.clearStorageSync()
+	uni.reLaunch({
+		url: '../index/index'
 	})
 }
 </script>
