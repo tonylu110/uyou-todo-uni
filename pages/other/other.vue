@@ -43,6 +43,7 @@ const list = reactive([])
 const setX = ref(0)
 const title = ref('')
 const listData = reactive([])
+const listName = ref('')
 uni.$on('systemBarHeight', (res): void => {
 	systemBarHeight.value = res
 })
@@ -72,6 +73,7 @@ onLoad((e) => {
 	} else {
 		title.value = '未完成'
 	}
+	listName.value = e.name
 })
 
 const back = () => {
@@ -114,7 +116,7 @@ const setOk = (id: number, isOk: boolean) => {
 					success: () => {
 						list.length = 0
 						for (let i = 0; i < listData.length; i++) { 
-							if (listData[i].ok === (title.value === 'allDo')) {
+							if (listData[i].ok === (listName.value === 'allDo')) {
 								list.push(listData[i])
 							}
 						}
