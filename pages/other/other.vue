@@ -124,6 +124,61 @@ const setOk = (id: number, isOk: boolean) => {
 		}
 	})
 }
+
+const deleteItem = (id: number) => {
+	let delete_index = id
+	let newArray = []
+	let newArrayAll = []
+	for (let i = 0, len = list.length; i < len; i++) {
+	    if (list[i].id != delete_index) {
+	        newArray.push(list[i])
+	    }
+	}
+	list.length = 0
+	newArray.forEach((item) => {
+		list.push(item)
+	})
+	for (let i = 0, len = listData.length; i < len; i++) {
+		if (listData[i].id != delete_index) {
+		    newArrayAll.push(listData[i])
+		}
+	}
+	listData.length = 0
+	newArrayAll.forEach((item) => {
+		listData.push(item)
+	})
+	uni.setStorage({
+		key: 'todo',
+		data: listData
+	})
+	uni.getStorage({
+		key: 'uid',
+		success: (uid) => {
+			if (uid.data !== '') {
+				uni.request({
+					url: 'https://api.todo.uyou.org.cn/edittodo',
+					method: 'POST',
+					header: {
+						'Content-Type': 'application/json'
+					},
+					data: {
+						uid: uid.data,
+						data: JSON.stringify({
+							data: listData
+						})
+					},
+					success: (res) => {
+						console.log(res.data);
+					}
+				})
+			}
+		}
+	})
+	setX.value = 1
+	setTimeout(() => {
+		setX.value = 0
+	}, 10)
+}
 </script>
 
 <style lang="scss">
