@@ -13,6 +13,21 @@
 </script>
 
 <style>
+@font-face {
+	font-family: 'smartisan-t';
+	src: url('static/fonts/smartisan-t/Smartisan_Compact-Regular.ttf');
+}
+
+@font-face {
+	font-family: 'smartisan-t';
+	font-weight: bold;
+	src: url('static/fonts/smartisan-t/Smartisan_Compact-Bold.ttf');
+}	
+
+* {
+	font-family: 'smartisan-t';
+}
+
 .black-back {
 	background-color: #00000030;
 	height: 100%;

@@ -134,7 +134,7 @@ onMounted(() => {
 	uni.request({
 		url: 'http://api.todo.uyou.org.cn/update/get',
 		success: (res) => {
-			const version = 113
+			const version = 114
 			if (version < res.data[0].code) {
 				let updateString: string = i18n().newVersion + res.data[0].version + '\n'
 				res.data[0].data.forEach((item) => {
