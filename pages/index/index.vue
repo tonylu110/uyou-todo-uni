@@ -131,27 +131,30 @@ onMounted(() => {
 			screenHeight.value = res.screenHeight
 		}
 	})
-	uni.request({
-		url: 'http://api.todo.uyou.org.cn/update/get',
-		success: (res) => {
-			const version = 114
-			if (version < res.data[0].code) {
-				let updateString: string = i18n().newVersion + res.data[0].version + '\n'
-				res.data[0].data.forEach((item) => {
-					updateString = updateString + item + '\n'
-				})
-				uni.showModal({
-					title: i18n().updateText,
-					content: updateString,
-					success: (res) => {
-						if (res.confirm) {
-							plus.runtime.openURL('https://github.com/tonylu110/uyou-todo-uni/releases')
+	const autoUpdateState = uni.getStorageSync('autoUpdateState') || uni.getStorageSync('autoUpdateState') === ''
+	if (autoUpdateState) {
+		uni.request({
+			url: 'http://api.todo.uyou.org.cn/update/get',
+			success: (res) => {
+				const version = 114
+				if (version < res.data[0].code) {
+					let updateString: string = i18n().newVersion + res.data[0].version + '\n'
+					res.data[0].data.forEach((item) => {
+						updateString = updateString + item + '\n'
+					})
+					uni.showModal({
+						title: i18n().updateText,
+						content: updateString,
+						success: (res) => {
+							if (res.confirm) {
+								plus.runtime.openURL('https://github.com/tonylu110/uyou-todo-uni/releases')
+							}
 						}
-					}
-				})
+					})
+				}
 			}
-		}
-	})
+		})
+	}
 })
 
 const setOk = (id: number, isOk: boolean): void => {

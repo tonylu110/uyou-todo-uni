@@ -33,6 +33,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/update/update",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

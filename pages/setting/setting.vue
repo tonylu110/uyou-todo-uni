@@ -25,6 +25,8 @@
 					<Item
 					  title="自动获取更新"
 					  :showSwitch="true"
+					  :switchState="autoUpdateState"
+					  @switchFun="setAutoUpdate"
 					/>
 					<Item
 					  title="软件更新" 
@@ -105,6 +107,12 @@ const clearData = () => {
 	uni.reLaunch({
 		url: '../index/index'
 	})
+}
+
+const autoUpdateState = ref(uni.getStorageSync('autoUpdateState') || uni.getStorageSync('autoUpdateState') === '')
+const setAutoUpdate = () => {
+	autoUpdateState.value = !autoUpdateState.value
+	uni.setStorageSync('autoUpdateState', autoUpdateState.value)
 }
 </script>
 
