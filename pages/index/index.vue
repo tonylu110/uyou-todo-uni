@@ -50,6 +50,8 @@ import i18n from '../../i18n'
 import AddItem from '../../components/AddItem/AddItem.vue'
 import FirstLoad from '../../util/FirstLoad'
 import IItemData from '../../interface/IItemData'
+import appVersion from '../../util/appVersion'
+
 FirstLoad()
 const rpx2px = (rpx: number): number => {
 	return uni.upx2px(rpx)
@@ -136,7 +138,7 @@ onMounted(() => {
 		uni.request({
 			url: 'http://api.todo.uyou.org.cn/update/get',
 			success: (res) => {
-				const version = 114
+				const version = appVersion
 				if (version < res.data[0].code) {
 					let updateString: string = i18n().newVersion + res.data[0].version + '\n'
 					res.data[0].data.forEach((item) => {

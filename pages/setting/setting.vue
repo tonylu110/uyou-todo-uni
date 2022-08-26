@@ -30,6 +30,7 @@
 					/>
 					<Item
 					  title="软件更新" 
+					  @itemFun="toUpdate"
 					/>
 				</ItemBox>
 				<ItemButton mode="error" @click="clearData">
@@ -113,6 +114,12 @@ const autoUpdateState = ref(uni.getStorageSync('autoUpdateState') || uni.getStor
 const setAutoUpdate = () => {
 	autoUpdateState.value = !autoUpdateState.value
 	uni.setStorageSync('autoUpdateState', autoUpdateState.value)
+}
+
+const toUpdate = () => {
+	uni.navigateTo({
+		url: '../update/update'
+	})
 }
 </script>
 
