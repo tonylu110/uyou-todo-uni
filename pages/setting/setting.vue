@@ -21,6 +21,15 @@
 				  :showSwitch="false"
 				  @itemFun="toAccount"
 				/>
+				<ItemBox>
+					<Item
+					  title="自动获取更新"
+					  :showSwitch="true"
+					/>
+					<Item
+					  title="软件更新" 
+					/>
+				</ItemBox>
 				<ItemButton mode="error" @click="clearData">
 					<text>{{ i18n().clearData }}</text>
 				</ItemButton>
