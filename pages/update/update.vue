@@ -157,7 +157,7 @@ const back = () => {
 	
 	&:deep(.item-button) {
 		position: fixed;
-		bottom: 10px;
+		bottom: 0;
 	}
 }
 </style>

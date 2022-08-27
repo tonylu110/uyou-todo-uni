@@ -33,6 +33,11 @@
 					  @itemFun="toUpdate"
 					/>
 				</ItemBox>
+				<ItemBox>
+					<Item image="/static/web.png"/>
+					<Item image="/static/desk.png" />
+					<Item image="/static/donate.png" />
+				</ItemBox>
 				<ItemButton mode="error" @click="clearData">
 					<text>{{ i18n().clearData }}</text>
 				</ItemButton>

@@ -4,7 +4,12 @@
 	  :style="showSwitch ? {backgroundColor: 'white', color: 'black'} : ''"
 	  @click="emits('itemFun')"
 	>
-	    <text>{{ title }}</text>
+	    <view class="item-title">
+			<view v-if="image" class="img-box">
+				<image :src="image" mode=""></image>
+			</view>
+	    	<text>{{ title }}</text>
+	    </view>
 	    <switch 
 	      v-if="showSwitch"
 	      :checked="switchState" 
@@ -31,7 +36,8 @@ defineProps({
   showArrow: {
     default: true,
     type: Boolean
-  }
+  },
+  image: String
 })
 const emits = defineEmits<{
 	(e: 'itemFun'): void,
@@ -52,10 +58,34 @@ const emits = defineEmits<{
   align-items: center;
   margin-bottom: 25rpx;
   justify-content: space-between;
+  position: relative;
   	
     &:active {
         background-color: #5985eb;
         color: white;
     }
+	
+	.item-title {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		
+		.img-box {
+			background-color: #00000005;
+			width: 120rpx;
+			height: 120rpx;
+			margin-left: -30rpx;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-right: 30rpx;
+			border-right: 2rpx solid #00000010;
+			
+			image {
+				height: 60rpx;
+				width: 60rpx;
+			}
+		}
+	}
 }
 </style>

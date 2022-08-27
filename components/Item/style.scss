@@ -37,6 +37,10 @@ movable-area {
 		  box-shadow: 0 2rpx 10rpx #7a695c50;
 		  margin-bottom: 20rpx;
 		  
+		  &:last-child {
+		  	margin-bottom: 65rpx;
+		  }
+		  
 			.time-area {
 				background-color: #ede4d8;
 				margin-left: -20rpx;

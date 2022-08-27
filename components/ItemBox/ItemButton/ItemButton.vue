@@ -34,6 +34,10 @@ defineProps({
 		background-color: #5985eb;
 		color: white;
     }
+	
+	&:last-child {
+		margin-bottom: 65rpx;
+	}
 
 	&.primary {
 		background-color: #5985eb;
