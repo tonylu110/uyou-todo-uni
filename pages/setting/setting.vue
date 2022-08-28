@@ -36,7 +36,7 @@
 				<ItemBox>
 					<Item image="/static/web.png" title="官方网站" @itemFun="openUrl('https://uyoutodo.uyou.org.cn')" />
 					<Item image="/static/desk.png" title="桌面版" @itemFun="openUrl('https://github.com/tonylu110/uyou-todo-electron/releases')" />
-					<Item image="/static/donate.png" title="捐赠" />
+					<Item image="/static/donate.png" title="捐赠" @itemFun="toDonate()" />
 				</ItemBox>
 				<ItemButton mode="error" @click="clearData">
 					<text>{{ i18n().clearData }}</text>
@@ -97,9 +97,9 @@ const back = () => {
 }
 
 const isShowLangSet = ref(false)
-const showLangSet = () => [
+const showLangSet = () => {
 	isShowLangSet.value = !isShowLangSet.value
-]
+}
 
 const toAccount = () => {
 	uni.navigateTo({
@@ -129,6 +129,12 @@ const toUpdate = () => {
 
 const openUrl = (url: string) => {
 	plus.runtime.openURL(url)
+}
+
+const toDonate = () => {
+	uni.navigateTo({
+		url: '../donate/donate'
+	})
 }
 </script>
 

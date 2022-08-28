@@ -42,6 +42,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/donate/donate",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
