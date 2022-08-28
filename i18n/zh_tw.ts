@@ -51,6 +51,22 @@ const list = [
     }
 ]
 
+const update = {
+    autoUpdate: '自動獲取更新',
+    updateTitle: '軟體更新',
+    notUpdate: '暫無更新',
+    checkingUpdate: '檢查更新中...',
+    checkUpdate: '檢查更新',
+    gotoUpdate: '前往更新',
+    updateLog: '更新日誌：'
+}
+
+const otherList = {
+    toWeb: '前往官網',
+    toDesk: '桌面版',
+    toDonate: '捐贈'
+}
+
 export default {
 	list,
 	copyText,
@@ -62,5 +78,7 @@ export default {
 	loginText,
 	myAccount,
 	listMenu,
-	clearData
+	clearData,
+	update,
+	otherList
 }

@@ -51,6 +51,22 @@ const list = [
     }
 ]
 
+const update = {
+    autoUpdate: 'Get Updates Automatically',
+    updateTitle: 'App Update',
+    notUpdate: 'No update yet',
+    checkingUpdate: 'Checking for updates...',
+    checkUpdate: 'Check for updates',
+    gotoUpdate: 'Go to update',
+    updateLog: 'Changelog:'
+}
+
+const otherList = {
+    toWeb: 'Go to the official website',
+    toDesk: 'Desktop version',
+    toDonate: 'Donate'
+}
+
 export default {
 	list,
 	copyText,
@@ -62,5 +78,7 @@ export default {
 	loginText,
 	myAccount,
 	listMenu,
-	clearData
+	clearData,
+	update,
+	otherList
 }

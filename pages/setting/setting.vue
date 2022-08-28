@@ -23,20 +23,20 @@
 				/>
 				<ItemBox>
 					<Item
-					  title="自动获取更新"
+					  :title="i18n().update.autoUpdate"
 					  :showSwitch="true"
 					  :switchState="autoUpdateState"
 					  @switchFun="setAutoUpdate"
 					/>
 					<Item
-					  title="软件更新" 
+					  :title="i18n().update.updateTitle" 
 					  @itemFun="toUpdate"
 					/>
 				</ItemBox>
 				<ItemBox>
-					<Item image="/static/web.png" title="官方网站" @itemFun="openUrl('https://uyoutodo.uyou.org.cn')" />
-					<Item image="/static/desk.png" title="桌面版" @itemFun="openUrl('https://github.com/tonylu110/uyou-todo-electron/releases')" />
-					<Item image="/static/donate.png" title="捐赠" @itemFun="toDonate()" />
+					<Item image="/static/web.png" :title="i18n().otherList.toWeb" @itemFun="openUrl('https://uyoutodo.uyou.org.cn')" />
+					<Item image="/static/desk.png" :title="i18n().otherList.toDesk" @itemFun="openUrl('https://github.com/tonylu110/uyou-todo-electron/releases')" />
+					<Item image="/static/donate.png" :title="i18n().otherList.toDonate" @itemFun="toDonate()" />
 				</ItemBox>
 				<ItemButton mode="error" @click="clearData">
 					<text>{{ i18n().clearData }}</text>

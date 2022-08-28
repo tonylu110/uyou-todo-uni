@@ -3,7 +3,7 @@
 		<TitleBar
 		  :showBackButton="true" 
 		  :showRightButton="false"
-		  title="软件更新" 
+		  :title="i18n().update.updateTitle" 
 		  bgColor="#7a695c" 
 		  fontColor="#fff"
 		  navShadowColor="90"
@@ -45,7 +45,7 @@ uni.$on('systemBarHeight', (res): void => {
 	systemBarHeight.value = res
 })
 
-const buttonText = ref('检查更新中...')
+const buttonText = ref(i18n().update.checkingUpdate)
 const updateMsg = ref([])
 const appNewVersion = ref('')
 
@@ -56,13 +56,13 @@ const update = () => {
 			const version = appversion
 			if (version < res.data[0].code) {
 				updateMsg.value = res.data[0].data
-				appNewVersion.value = `新版本: ${res.data[0].version}`
-				buttonText.value = '前往更新'
+				appNewVersion.value = `${i18n().newVersion}${res.data[0].version}`
+				buttonText.value = i18n().update.gotoUpdate
 			} else {
-				buttonText.value = '检查更新'
-				appNewVersion.value = '暂无更新'
+				buttonText.value = i18n().update.checkUpdate
+				appNewVersion.value = i18n().update.notUpdate
 				uni.showToast({
-					title: '暂无更新',
+					title: i18n().update.notUpdate,
 					icon: 'none'
 				})
 			}
@@ -74,7 +74,7 @@ const buttonClick = () => {
 	if (updateMsg.value.length > 0) {
 		plus.runtime.openURL('https://github.com/tonylu110/uyou-todo-uni/releases')
 	} else {
-		buttonText.value = '检查更新中...'
+		buttonText.value = i18n().update.checkingUpdate
 		appNewVersion.value = ''
 		setTimeout(() => {
 			update()
