@@ -34,9 +34,9 @@
 					/>
 				</ItemBox>
 				<ItemBox>
-					<Item image="/static/web.png"/>
-					<Item image="/static/desk.png" />
-					<Item image="/static/donate.png" />
+					<Item image="/static/web.png" title="官方网站" @itemFun="openUrl('https://uyoutodo.uyou.org.cn')" />
+					<Item image="/static/desk.png" title="桌面版" @itemFun="openUrl('https://github.com/tonylu110/uyou-todo-electron/releases')" />
+					<Item image="/static/donate.png" title="捐赠" />
 				</ItemBox>
 				<ItemButton mode="error" @click="clearData">
 					<text>{{ i18n().clearData }}</text>
@@ -125,6 +125,10 @@ const toUpdate = () => {
 	uni.navigateTo({
 		url: '../update/update'
 	})
+}
+
+const openUrl = (url: string) => {
+	plus.runtime.openURL(url)
 }
 </script>
 
