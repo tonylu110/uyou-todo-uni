@@ -21,7 +21,7 @@
 				  :showSwitch="false"
 				  @itemFun="toAccount"
 				/>
-				<ItemBox>
+				<ItemBox v-if="device !== 'web'">
 					<Item
 					  :title="i18n().update.autoUpdate"
 					  :showSwitch="true"
@@ -59,6 +59,7 @@ import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
 import i18n from '../../i18n'
 
 const version = uni.getAppBaseInfo().appVersion
+const device = uni.getSystemInfoSync().uniPlatform
 
 const rpx2px = (rpx: number): number => {
 	return uni.upx2px(rpx)
