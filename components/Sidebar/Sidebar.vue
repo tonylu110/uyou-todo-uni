@@ -1,5 +1,9 @@
 <template>
-	<view class="menu" :style="{transform: openBar ? '' : 'translateX(-555rpx)'}">
+	<view class="menu" :style="{
+	  transform: openBar ? '' : 'translateX(-555rpx)',
+	  backgroundColor: blurShow ? '#fff6dc' : '',
+	  boxShadow: openBar ? '20rpx 0 30rpx #00000010' : ''
+	}">
 		<view class="list">
 			<text class="title t1">{{ i18n().accountPage.account }}</text>
 			<view class="account-list" @click="emits('toAccount')" style="margin-top: 30rpx;">
@@ -26,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import i18n from '../../i18n'
 	
 defineProps({
@@ -47,6 +52,11 @@ const toOther = (data: string) => {
 		url: '../other/other?name=' + data,
 	})
 }
+
+const blurShow = ref(false)
+if (uni.getSystemInfoSync().browserName === 'chrome' && Number(uni.getSystemInfoSync().browserVersion.split('.')[0]) < 76) {
+	blurShow.value = true
+}
 </script>
 
 <style lang="scss">
@@ -55,13 +65,14 @@ const toOther = (data: string) => {
 	left: 0;
 	top: 0;
 	width: 550rpx;
-	background-color: #fff6dc;
+	background-color: #fff6dc70;
 	height: 100%;
 	z-index: 102;
 	transition: transform 0.4s;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	backdrop-filter: blur(20px);
 	
 	.list {
 		.setting-list {

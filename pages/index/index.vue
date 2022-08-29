@@ -17,7 +17,7 @@
 			@toAccount="toAccount"
 			@toOther="toOther"
 		/>
-		<view class="black-back" style="z-index: 101; top: 0" v-if="openBar" @click="openSidebar"></view>
+		<view class="black-back" style="z-index: 101; top: 0; backdrop-filter: blur(0px);" v-if="openBar" @click="openSidebar"></view>
 		<scroll-view scroll-y="true" :style="{height: screenHeight - systemBarHeight - rpx2px(101) + 'px'}">
 			<view class="scroll-in">
 				<view style="height: 30rpx;"></view>
