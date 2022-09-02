@@ -91,6 +91,11 @@ onShow(() => {
 			}
 		}
 	})
+	var color = plus.android.newObject("android.graphics.Color")
+	var ac = plus.android.runtimeMainActivity();  
+	var c2int = plus.android.invoke(color, "parseColor", "#eeeeee");  
+	var win = plus.android.invoke(ac, "getWindow");   
+	plus.android.invoke(win, "setNavigationBarColor", c2int);
 })
 
 const back = () => {
